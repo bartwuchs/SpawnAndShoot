@@ -56,6 +56,7 @@ public class Spawner : MonoBehaviour
     {
         GameObject go = Instantiate(Prefab, pos, rot);
         go.GetComponent<Renderer>().material.color = Gradient.Evaluate(Random.value);
+        go.transform.SetParent(transform);
     }
     private void SpawnOne(Vector3 pos)
     {
