@@ -7,14 +7,28 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public GameObject Prefab;
-    
+
+    public Gradient Gradient;
 
     // Update is called once per frame
     void Update()
     {
         Move();
         if (Input.GetKeyDown(KeyCode.Space))
-            SpawnMany(10);
+            SpawnInPlane(100);
+    }
+
+    void SpawnInPlane(int n) {
+
+        for (int i = 0; i < n; i++)
+        {
+            float x = Random.Range(-20f, 20f);
+            float y = 20;
+            float z = Random.Range(-20f, 20f);
+            Vector3 pos = new Vector3(x, y, z);
+            Quaternion rot = Random.rotation;
+            SpawnOne(pos,rot);
+        }
     }
     private void SpawnMany(int n)
     {
@@ -38,6 +52,11 @@ public class Spawner : MonoBehaviour
         return Random.value <  FillValue;
     }
 
+    private void SpawnOne(Vector3 pos, Quaternion rot)
+    {
+        GameObject go = Instantiate(Prefab, pos, rot);
+        go.GetComponent<Renderer>().material.color = Gradient.Evaluate(Random.value);
+    }
     private void SpawnOne(Vector3 pos)
     {
         Instantiate(Prefab, pos, Quaternion.identity);
