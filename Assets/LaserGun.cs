@@ -14,18 +14,21 @@ public class LaserGun : MonoBehaviour
     void Update()
     {
         Shoot();
+      
     }
+
+    
 
     void Shoot()
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(FirePoint.position, FirePoint.forward, 
+        if (Physics.Raycast(FirePoint.position, FirePoint.forward,
             out hit,
             MaxDistance,
             WhatIsShootable))
         {
-            Debug.Log(hit.transform.name +" "+hit.point);
+            Debug.Log(hit.transform.name + " " + hit.point);
         }
     }
 }
